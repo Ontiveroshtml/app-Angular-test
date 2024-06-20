@@ -1,0 +1,60 @@
+<div>
+  <h2 mat-dialog-title *ngIf="!data">Agregar producto</h2>
+  <h2 mat-dialog-title *ngIf="data">Editar producto</h2>
+
+  <mat-dialog-content>
+    <form [formGroup]="formGroup">
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error *ngIf="formGroup.get('name')?.hasError('required')"
+          >El nombre es obligatorio</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Código</mat-label>
+        <input matInput formControlName="code" />
+        <mat-error *ngIf="formGroup.get('code')?.hasError('required')"
+          >El código es obligatorio</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Descripción</mat-label>
+        <input matInput formControlName="description" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Precio</mat-label>
+        <input matInput formControlName="price" />
+        <mat-error *ngIf="formGroup.get('price')?.hasError('required')"
+          >El precio es obligatorio</mat-error
+        >
+        <mat-error *ngIf="formGroup.get('price')?.hasError('pattern')"
+          >Precio inválido</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Cantidad</mat-label>
+        <input matInput formControlName="amount" type="number" />
+        <mat-error *ngIf="formGroup.get('amount')?.hasError('required')"
+          >La cantidad es obligatoria</mat-error
+        >
+        <mat-error *ngIf="formGroup.get('amount')?.hasError('min')"
+          >La cantidad debe ser mayor que 0</mat-error
+        >
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="save()">
+      Guardar
+    </button>
+    <button mat-raised-button color="warn" (click)="onCancel()">
+      Cancelar
+    </button>
+  </mat-dialog-actions>
+</div>
