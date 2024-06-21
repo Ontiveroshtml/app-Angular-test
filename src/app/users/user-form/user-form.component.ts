@@ -82,17 +82,6 @@ export class UserFormComponent {
     }
   }
 
-  delete(id: string) {
-    this.userService.deleteUser(id).subscribe(
-      (response) => {
-        console.log('Usuario eliminado exitosamente', response);
-        this.dialogRef.close(true);
-      },
-      (error) => {
-        console.error('Error al eliminar al usuario', error);
-      }
-    );
-  }
   close(): void {
     this.dialogRef.close();
   }

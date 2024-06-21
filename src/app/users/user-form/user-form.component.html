@@ -1,6 +1,7 @@
 <h2 mat-dialog-title>{{ data ? 'Editar Usuario' : 'Crear Usuario' }}</h2>
 <mat-dialog-content>
   <form [formGroup]="formGroup">
+
     <mat-form-field appearance="fill">
       <mat-label>Username</mat-label>
       <input matInput formControlName="username">
@@ -21,19 +22,24 @@
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
       <input matInput formControlName="email">
-      <mat-error *ngIf="formGroup.get('email')?.hasError('required') || formGroup.get('email')?.hasError('email')">Debe ser un email válido.</mat-error>
+      <mat-error *ngIf="formGroup.get('email')?.hasError('required') || formGroup.get('email')?.hasError('email')">Debe
+        ser un email válido.</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Teléfono</mat-label>
       <input matInput formControlName="phone">
-      <mat-error *ngIf="formGroup.get('phone')?.hasError('required') || formGroup.get('phone')?.hasError('pattern')">Debe ser un número de teléfono válido.</mat-error>
+      <mat-error
+        *ngIf="formGroup.get('phone')?.hasError('required') || formGroup.get('phone')?.hasError('pattern')">Debe ser un
+        número de teléfono válido.</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Contraseña</mat-label>
       <input matInput type="password" formControlName="password">
-      <mat-error *ngIf="formGroup.get('password')?.hasError('required') || formGroup.get('password')?.hasError('minlength')">La contraseña es requerida y debe tener al menos 6 caracteres.</mat-error>
+      <mat-error
+        *ngIf="formGroup.get('password')?.hasError('required') || formGroup.get('password')?.hasError('minlength')">La
+        contraseña es requerida y debe tener al menos 6 caracteres.</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">

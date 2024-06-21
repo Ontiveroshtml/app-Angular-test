@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../../../models/Product';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductsServiceService } from '../../../services/products/products-service.service';
 import { ProductFormComponent } from '../product-form/product-form.component';
@@ -20,17 +19,16 @@ export class ProductsListComponent implements OnInit {
   constructor(
     private productService: ProductsServiceService,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.productListMethod();
   }
 
-  productListMethod(){
+  productListMethod() {
     try {
       this.productService.getProducst().subscribe((items: Product[]) => {
         this.productList = new MatTableDataSource(items);
-        // console.log(items);
       });
     } catch (error) {
       console.log(error);
@@ -48,11 +46,11 @@ export class ProductsListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
-      console.log("the dialog is closed")
-      if(result) {
-        this.productListMethod()
+      console.log("the dialog is closed");
+      if (result) {
+        this.productListMethod();
       }
-    })
+    });
   }
 
   editDialog(element: Product) {
@@ -61,33 +59,39 @@ export class ProductsListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
-      console.log("the dialog is closed")
-      if(result) {
-        this.productListMethod()
+      console.log("the dialog is closed");
+      if (result) {
+        this.productListMethod();
       }
-    })
+    });
   }
 
-  deleteDialog(_id:string) {
+  deleteDialog(_id: string) {
     const dialogRef = this.dialog.open(ConfirmationComponentComponent, {
       data: null,
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
-      console.log("the dialog is closed")
-      if(result) {
+      console.log('The dialog was closed');
+      if (result) {
         this.deleteProduct(_id);
       }
-    })
+    });
   }
 
-  deleteProduct(_id:string){
-    try{
-      this.productService.deleteProduct(_id).subscribe(item=>console.log(item))
-      this.productListMethod();
-
-      }catch(error){
-        console.log(error);
-      }
+  deleteProduct(_id: string) {
+    try {
+      this.productService.deleteProduct(_id).subscribe({
+        next: (response) => {
+          console.log('Product deleted successfully', response);
+          this.productListMethod(); // Update the list after deletion
+        },
+        error: (error) => {
+          console.error('Error deleting product', error);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

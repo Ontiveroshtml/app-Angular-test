@@ -30,6 +30,7 @@ export class LoginComponent {
       this.authService.login(username, password).subscribe(
         response => {
           if (response && response.token) {
+            console.log('Token:', response.token); // Aquí se envía el token a la consola
             this.router.navigate(['/ProductsListComponent']);
           } else {
             alert('Login failed');

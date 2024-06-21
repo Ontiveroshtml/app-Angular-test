@@ -67,15 +67,18 @@ export class UserListComponent {
     })
   }
 
-  deleteDialog(element: User) {
+  deleteDialog(element: any) {
     const dialogRef = this.dialog.open(ConfirmationComponentComponent, {
-      data: element,
+      data: { type: 'deleteUser', element: element },
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
       console.log("the dialog is closed")
       if(result) {
-        this.productListMethod()
+        console.log(element)
+        this.userService.deleteUser(element._id).subscribe(() => {
+          this.productListMethod();
+        });
       }
     })
   }

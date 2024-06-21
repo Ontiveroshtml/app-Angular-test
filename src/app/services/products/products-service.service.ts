@@ -7,14 +7,12 @@ import { Product } from '../../models/Product';
   providedIn: 'root'
 })
 export class ProductsServiceService {
+  private URL = 'http://localhost:5000/api/product';
 
   constructor(private http: HttpClient) { }
 
-  //Conexion con la API de backend
-  URL = "http://localhost:5000/api/product";
-
-  getProducst():Observable<Product[]> {
-    return this.http.get<Product[]>(this.URL)
+  getProducst(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.URL);
   }
 
   createProduct(product: any): Observable<Product> {
@@ -25,9 +23,8 @@ export class ProductsServiceService {
     return this.http.patch<Product>(this.URL, product);
   }
 
-  deleteProduct(id:string):Observable<Product> {
-    return this.http.delete<Product>(this.URL+"/"+id)
+  deleteProduct(id: string): Observable<Product> {
+    return this.http.delete<Product>(this.URL + "/" + id)
   }
 
 }
-  

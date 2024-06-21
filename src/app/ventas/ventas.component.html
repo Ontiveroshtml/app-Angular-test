@@ -1,0 +1,29 @@
+<div class="sales-container">
+    <div class="product-grid">
+        <mat-card *ngFor="let product of products" class="product-card">
+            <img mat-card-image [src]="product.imageUrl" alt="{{ product.name }}">
+            <mat-card-content>
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.description }}</p>
+                <p>${{ product.price }}</p>
+                <button mat-raised-button color="primary" (click)="addToCart(product)">Añadir al carrito</button>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="order-section">
+        <mat-card class="order-card">
+            <mat-card-header>
+                <mat-card-title>Detalles de orden</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div *ngFor="let item of cart">
+                    <p>{{ item.name }} - ${{ item.price }}</p>
+                </div>
+                <p *ngIf="cart.length === 0">No hay artículos en el carrito.</p>
+                <button mat-raised-button color="accent" (click)="placeOrder()"
+                    [disabled]="cart.length === 0">Comprar</button>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
