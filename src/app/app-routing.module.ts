@@ -6,7 +6,7 @@ import { ProductFormComponent } from './components/products/product-form/product
 import { UsersComponent } from './users/users.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { LoginComponent } from './components/login/login/login.component';
-import { VentasComponent } from './ventas/ventas.component';
+import { VentasComponent } from './components/ventas/ventas.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },

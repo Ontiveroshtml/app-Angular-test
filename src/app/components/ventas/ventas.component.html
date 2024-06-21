@@ -1,0 +1,33 @@
+<div class="sales-container">
+    <div class="product-grid">
+        <mat-card *ngFor="let product of filteredProductList" class="product-card">
+            <mat-card-header>
+                <mat-card-title>{{ product.name }}</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="https://res.cloudinary.com/walmart-labs/image/upload/d_default.jpg/w_960,dpr_auto,f_auto,q_auto:best/gr/images/product-images/img_large/00750107130145L.jpg" alt="{{ product.name }}">
+            <mat-card-content>
+                <p>Precio: {{ product.price | currency }}</p>
+                <p>Cantidad: {{ product.amount }}</p>
+            </mat-card-content>
+            <mat-card-actions class="center-actions">
+                <button mat-raised-button color="warn" (click)="addToCart(product)">Agregar al carrito</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+    <div class="order-section">
+        <mat-card class="order-card">
+            <mat-card-header>
+                <mat-card-title>Detalles de orden</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div *ngFor="let item of cart">
+                    <p>{{ item.name }} - ${{ item.price }}</p>
+                </div>
+                <p *ngIf="cart.length === 0">No hay artículos en el carrito.</p>
+                <p>Total: ${{ total | number:'1.2-2' }}</p> <!-- Mostrar el total -->
+                <button mat-raised-button color="accent" (click)="placeOrder()" [disabled]="cart.length === 0">Comprar</button>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

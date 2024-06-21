@@ -37,3 +37,9 @@
     flex-grow: 1;
     /* Asegura que el contenido se expanda para llenar el espacio disponible */
 }
+
+.center-actions {
+    display: flex;
+    justify-content: center;
+    /* Centra el contenido horizontalmente */
+}

@@ -29,7 +29,7 @@ import { UserFormComponent } from './users/user-form/user-form.component';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { LoginComponent } from './components/login/login/login.component';
-import { VentasComponent } from './ventas/ventas.component';
+import { VentasComponent } from './components/ventas/ventas.component';
 
 @NgModule({
   declarations: [AppComponent, MenubarComponent, ProductsListComponent, ProductFormComponent, ConfirmationComponentComponent, UsersComponent, UserListComponent, UserFormComponent, LoginComponent, VentasComponent],
