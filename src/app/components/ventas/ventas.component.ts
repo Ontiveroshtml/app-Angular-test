@@ -1,28 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { Ventas } from '../../models/ventas';
-import { ProductsServiceService } from '../../services/products/products-service.service';
+import { Product } from '../../models/Product'; // Asegúrate de que esta ruta es correcta
+import { ProductsServiceService } from '../../services/products/products-service.service'; // Asegúrate de que esta ruta es correcta
 import { MatDialog } from '@angular/material/dialog';
 import { ProductFormComponent } from '../products/product-form/product-form.component';
-import { Product } from '../../models/Product';
+import { DetailSaleService } from '../../services/detai/detail-sale.service'; // Import the service
 
 @Component({
   selector: 'app-ventas',
   templateUrl: './ventas.component.html',
-  styleUrl: './ventas.component.scss'
+  styleUrls: ['./ventas.component.scss']
 })
 export class VentasComponent implements OnInit {
   productList: Product[] = [];
   filteredProductList: Product[] = [];
   cart: Product[] = [];
-  total: number = 0; // Variable para almacenar el total de la compra
+  total: number = 0; 
 
   constructor(
     private productService: ProductsServiceService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private detailSaleService: DetailSaleService // Inject the service
   ) {}
 
   ngOnInit(): void {
     this.productListMethod();
+    this.detailSaleService.getProductSale().subscribe((products: Product[]) => {
+      this.cart = products;
+      this.calculateTotal();
+    });
   }
 
   productListMethod(): void {
@@ -54,17 +59,16 @@ export class VentasComponent implements OnInit {
   }
 
   addToCart(product: Product): void {
-    this.cart.push(product);
-    this.calculateTotal();
+    this.detailSaleService.addProductSale(product); // Use the service to add product
   }
 
   calculateTotal(): void {
-    this.total = this.cart.reduce((acc, product) => acc + product.price, 0);
+    this.total = this.cart.reduce((acc, product) => acc + product.price * product.amount, 0); // Multiply price by amount
   }
 
   placeOrder(): void {
     alert('La compra se ha realizado con éxito!');
     this.cart = [];
-    this.total = 0; // Reiniciar el total después de realizar la compra
+    this.total = 0;
   }
 }
