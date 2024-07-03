@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../../services/auth/auth.service';
+
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
   loginForm!: FormGroup;
@@ -15,7 +16,7 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -30,8 +31,7 @@ export class LoginComponent {
       this.authService.login(username, password).subscribe(
         response => {
           if (response && response.token) {
-            console.log('Token:', response.token); // Aquí se envía el token a la consola
-            this.router.navigate(['/ProductsListComponent']);
+            this.router.navigate(['/usuarios-list']);
           } else {
             alert('Login failed');
           }
